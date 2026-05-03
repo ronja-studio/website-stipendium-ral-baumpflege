@@ -1,0 +1,563 @@
+/* ============================================
+   Fonts (self-hosted, no third-party requests)
+   ============================================ */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/BarlowCondensed-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/BarlowCondensed-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/BarlowCondensed-MediumItalic.woff2') format('woff2');
+}
+
+/* ============================================
+   Design tokens
+   ============================================ */
+:root {
+  --orange: #FF3B00;
+  --green:  #003C00;
+  --white:  #FFFFFF;
+  --section-gap: 16px;
+}
+
+/* ============================================
+   Reset / base
+   ============================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--white);
+  background: var(--green);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  isolation: isolate;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+h1 {
+  font-size: 80px;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--white);
+  text-shadow: -4px 4px 0 var(--orange);
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+p {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+/* ============================================
+   Header (brand text + logo)
+   ============================================ */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 32px 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.brand {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.brand:hover {
+  text-decoration: underline;
+}
+
+.logo-link {
+  display: block;
+  line-height: 0;
+}
+
+.logo {
+  width: 80px;
+  height: auto;
+  display: block;
+}
+
+/* ============================================
+   Accessibility (skip link + focus styles)
+   ============================================ */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--white);
+  color: var(--green);
+  padding: 12px 20px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 0 0 8px 0;
+  transform: translateY(-100%);
+  z-index: 100;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+details summary:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: -4px;
+  border-radius: 50px;
+}
+
+/* ============================================
+   Decorative pen + wavy line
+   ============================================ */
+.decoration {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.pen-rect {
+  position: absolute;
+  top: var(--h1-top, 21%);
+  left: 80px;
+  width: 110px;
+  height: calc(var(--faq-top, 21%) + var(--faq-height, 56%) - var(--h1-top, 21%));
+  background: var(--orange);
+}
+
+.pen-tip {
+  position: absolute;
+  top: calc(var(--faq-top, 21%) + var(--faq-height, 56%) + var(--section-gap));
+  left: 80px;
+  width: 0;
+  height: 0;
+  border-left: 55px solid transparent;
+  border-right: 55px solid transparent;
+  border-top: 70px solid var(--orange);
+}
+
+.wavy-line {
+  position: absolute;
+  top: calc(var(--faq-top, 21%) + var(--faq-height, 56%) + var(--section-gap) + 90px);
+  left: 0;
+  width: 50%;
+  height: auto;
+}
+
+/* ============================================
+   Main content
+   ============================================ */
+main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 20px 240px;
+}
+
+/* Hero */
+.hero {
+  margin-bottom: 60px;
+}
+
+.hero h1 {
+  margin-bottom: 32px;
+}
+
+.hero h2 {
+  margin-bottom: 24px;
+}
+
+/* ============================================
+   Accordion (FAQ)
+   ============================================ */
+.faq {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+  margin-bottom: 60px;
+}
+
+details {
+  background: var(--white);
+  border-radius: 50px;
+  color: var(--green);
+  overflow: hidden;
+}
+
+details summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 18px 18px 32px;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: 0.02em;
+  color: var(--green);
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+.arrow {
+  background: var(--green);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+details[open] .arrow {
+  transform: rotate(180deg);
+}
+
+.answer {
+  padding: 4px 32px 24px;
+}
+
+.answer p {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: var(--green);
+  margin-bottom: 12px;
+}
+
+.answer p:last-child {
+  margin-bottom: 0;
+}
+
+.answer ul {
+  margin: 8px 0 12px 24px;
+  list-style: disc;
+}
+
+.answer ul li {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: var(--green);
+  margin-bottom: 6px;
+}
+
+/* ============================================
+   CTA button
+   ============================================ */
+.cta-wrap {
+  position: absolute;
+  top: calc(var(--faq-top, 21%) + var(--faq-height, 56%) + var(--section-gap) + 90px + 5vw - 32px);
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.cta-wrap .cta {
+  pointer-events: auto;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--white);
+  color: var(--orange);
+  text-decoration: none;
+  padding: 12px 12px 12px 32px;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: transform 0.15s ease;
+}
+
+.cta:hover {
+  transform: scale(1.03);
+}
+
+.cta-icon {
+  background: var(--orange);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 40px 60px 60px;
+  position: relative;
+  z-index: 1;
+}
+
+footer a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================
+   Subpages (Kontakt, Impressum, Datenschutz)
+   ============================================ */
+.subpage main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+.subpage h1 {
+  font-size: 32px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  text-shadow: none;
+  margin-bottom: 32px;
+}
+
+.subpage h2 {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 32px 0 16px;
+}
+
+.subpage .text-block {
+  margin-bottom: 24px;
+}
+
+.subpage .text-block p {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: var(--white);
+}
+
+.subpage a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+.subpage a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .subpage h1 { font-size: 28px; }
+  .subpage main { padding: 32px 40px 64px; }
+}
+
+@media (max-width: 480px) {
+  .subpage h1 { font-size: 24px; margin-bottom: 24px; }
+  .subpage h2 { font-size: 18px; }
+  .subpage .text-block p { font-size: 16px; }
+  .subpage main { padding: 24px 20px 48px; }
+}
+
+/* ============================================
+   Tablet (≤ 900px)
+   ============================================ */
+@media (max-width: 900px) {
+  h1 {
+    font-size: 56px;
+    text-shadow: -3px 3px 0 var(--orange);
+  }
+
+  header {
+    padding: 24px 40px;
+  }
+
+  .brand {
+    font-size: 22px;
+  }
+
+  .logo {
+    width: 72px;
+  }
+
+  .pen-rect {
+    left: 50px;
+    width: 80px;
+  }
+
+  .pen-tip {
+    left: 50px;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-top: 50px solid var(--orange);
+  }
+
+  main {
+    padding: 32px 24px 200px;
+  }
+
+  details summary {
+    font-size: 22px;
+    padding: 16px 16px 16px 24px;
+  }
+
+  footer {
+    padding: 32px 40px 48px;
+  }
+}
+
+/* ============================================
+   Phone (≤ 480px)
+   ============================================ */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 40px;
+    text-shadow: -2px 2px 0 var(--orange);
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  header {
+    padding: 20px 20px;
+    gap: 16px;
+  }
+
+  .brand {
+    font-size: 18px;
+  }
+
+  .logo {
+    width: 56px;
+  }
+
+  .pen-rect {
+    left: 16px;
+    width: 48px;
+  }
+
+  .pen-tip {
+    left: 16px;
+    border-left: 24px solid transparent;
+    border-right: 24px solid transparent;
+    border-top: 32px solid var(--orange);
+  }
+
+  main {
+    padding: 24px 16px 160px;
+  }
+
+  .hero {
+    margin-bottom: 40px;
+  }
+
+  details summary {
+    font-size: 20px;
+    padding: 14px 14px 14px 20px;
+    gap: 12px;
+  }
+
+  .arrow {
+    width: 32px;
+    height: 32px;
+  }
+
+  .answer {
+    padding: 4px 20px 20px;
+  }
+
+  .answer p,
+  .answer ul li {
+    font-size: 16px;
+  }
+
+  .cta {
+    font-size: 16px;
+    padding: 10px 10px 10px 24px;
+  }
+
+  .cta-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .cta-wrap {
+    top: calc(var(--faq-top, 21%) + var(--faq-height, 56%) + var(--section-gap) + 90px + 5vw - 28px);
+  }
+
+  footer {
+    padding: 24px 20px 32px;
+  }
+}
